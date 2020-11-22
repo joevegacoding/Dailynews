@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 fileprivate let reuseIdentifier = "Cell"
 
@@ -16,7 +17,7 @@ class SearchViewController: UICollectionViewController, UICollectionViewDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.backgroundColor = .systemBackground
+        collectionView.backgroundColor = .tertiarySystemGroupedBackground
         collectionView.register(SearchCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         
         fetchNews()
@@ -50,6 +51,7 @@ class SearchViewController: UICollectionViewController, UICollectionViewDelegate
         
         let newResults = newsResults[indexPath.item]
         cell.titleLabel.text = newResults?.title
+        cell.imageView.sd_setImage(with: URL(string: newResults?.urlToImage ?? ""))
         
         
         return cell

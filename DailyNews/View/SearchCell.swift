@@ -12,8 +12,8 @@ class SearchCell: UICollectionViewCell {
     let imageView: UIImageView = {
         let imgView = UIImageView(image: UIImage(named: "SpaceX"))
         imgView.backgroundColor = .systemRed
-        imgView.heightAnchor.constraint(equalToConstant: 120).isActive = true
-        imgView.widthAnchor.constraint(equalToConstant: 140).isActive = true
+        imgView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        imgView.widthAnchor.constraint(equalToConstant: 160).isActive = true
         imgView.clipsToBounds = true
         imgView.layer.cornerRadius = 8
         return imgView
@@ -31,7 +31,7 @@ class SearchCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .systemBackground
+        backgroundColor = .secondarySystemBackground
         
         let stackView = UIStackView(arrangedSubviews: [titleLabel, imageView])
         stackView.axis  = .horizontal
