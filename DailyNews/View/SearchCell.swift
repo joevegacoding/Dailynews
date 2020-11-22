@@ -12,18 +12,18 @@ class SearchCell: UICollectionViewCell {
     let imageView: UIImageView = {
         let imgView = UIImageView(image: UIImage(named: "SpaceX"))
         imgView.backgroundColor = .systemRed
-        imgView.heightAnchor.constraint(equalToConstant: 200).isActive = true
-        imgView.widthAnchor.constraint(equalToConstant: 360).isActive = true
+        imgView.heightAnchor.constraint(equalToConstant: 120).isActive = true
+        imgView.widthAnchor.constraint(equalToConstant: 140).isActive = true
         imgView.clipsToBounds = true
-        imgView.layer.cornerRadius = 12
+        imgView.layer.cornerRadius = 8
         return imgView
     }()
     
     let titleLabel: UILabel = {
         let textView = UILabel()
         textView.text = "Elon Musk Just Dropped the Bitcoin Bomb in Twitter… Again"
-        textView.textAlignment = .center
-        textView.font = UIFont(name: "Helvetica-Bold", size: 20)
+        textView.textAlignment = .left
+        textView.font = UIFont(name: "Avenir-Heavy", size: 17)
         textView.numberOfLines = 0
         
         return textView
@@ -34,7 +34,7 @@ class SearchCell: UICollectionViewCell {
         backgroundColor = .systemBackground
         
         let stackView = UIStackView(arrangedSubviews: [titleLabel, imageView])
-        stackView.axis  = .vertical
+        stackView.axis  = .horizontal
         stackView.spacing =  12
         stackView.alignment = .center
         addSubview(stackView)
