@@ -8,13 +8,13 @@
 import UIKit
 
 class NewsViewController: UICollectionViewController {
+    
+    let networking = Service()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         collectionView.backgroundColor = .brown
-        
-
     }
     
     init() {

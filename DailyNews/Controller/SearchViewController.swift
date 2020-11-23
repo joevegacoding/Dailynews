@@ -10,22 +10,44 @@ import SDWebImage
 
 fileprivate let reuseIdentifier = "Cell"
 
-class SearchViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class SearchViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
     
+    
+    
+    fileprivate let searchController = UISearchController(searchResultsController: nil)
     fileprivate var newsResults = [Articles?]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+                
+        //var currentDate = Date(timeIntervalSinceReferenceDate: -123456789.0)"
         collectionView.backgroundColor = .tertiarySystemGroupedBackground
         collectionView.register(SearchCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         
+        setupSearchBar()
         fetchNews()
+    }
+    
+    fileprivate func setupSearchBar() {
+        definesPresentationContext = true
+        searchController.obscuresBackgroundDuringPresentation = false
+        navigationItem.searchController =  self.searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        searchController.searchBar.delegate = self
         
     }
     
-    fileprivate func fetchNews() {
-        Service.shared.fetchNews { (results, error)  in
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        Service.shared.fetchNews(searchTerm: searchText) { (articles, error) in
+            self.newsResults = articles
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
+    }
+    
+     func fetchNews() {
+        Service.shared.fetchNews( searchTerm: "Apple") { (results, error)  in
             
             if let error = error {
                 print("Failed to fetch articles: " , error)
@@ -35,6 +57,8 @@ class SearchViewController: UICollectionViewController, UICollectionViewDelegate
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
             }
+            
+
         }
     }
     

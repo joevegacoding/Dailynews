@@ -10,10 +10,19 @@ import Foundation
 class Service {
     static let shared = Service()
     
-    func fetchNews(completion: @escaping ([Articles], Error?) -> ()) {
+    
+    func fetchNews(searchTerm: String, completion: @escaping ([Articles], Error?) -> ()) {
+        let currentDate = Date()
+       let formatter = DateFormatter()
+    
+       formatter.timeStyle = .none
+       formatter.dateStyle = .medium
+       formatter.dateFormat = "YYYY-MM-dd"
+       let dateTimeString = formatter.string(from: currentDate)
+       
         
         print("Fetching news")
-    let urlString = "https://newsapi.org/v2/top-headlines?country=ca&apiKey=b25bdac4efc7487db7269d73120e13b9"
+    let urlString = "https://newsapi.org/v2/everything?q=\(searchTerm)&from=\(dateTimeString)&sortBy=popularity&apiKey=b25bdac4efc7487db7269d73120e13b9"
 
         guard let url = URL(string: urlString) else { return }
 
@@ -40,4 +49,3 @@ class Service {
     }
 
 }
-

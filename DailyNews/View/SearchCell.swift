@@ -11,7 +11,6 @@ class SearchCell: UICollectionViewCell {
     
     let imageView: UIImageView = {
         let imgView = UIImageView(image: UIImage(named: "SpaceX"))
-        imgView.backgroundColor = .systemRed
         imgView.heightAnchor.constraint(equalToConstant: 100).isActive = true
         imgView.widthAnchor.constraint(equalToConstant: 160).isActive = true
         imgView.clipsToBounds = true
